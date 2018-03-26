@@ -25,5 +25,8 @@
     "jest-runner": "^22.4.3",
     "throat": "^4.1.0",
     "worker-farm": "^1.6.0"
+  },
+  "peerDependencies": {
+    "jest": ">=21"
   }
 }
