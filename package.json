@@ -1,0 +1,29 @@
+{
+  "name": "jest-runner-concurrent",
+  "version": "0.0.0",
+  "description": "A concurrent runner for Jest",
+  "main": "src/index.js",
+  "scripts": {
+    "release": "git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/browsertron/jest-runner-concurrent.git"
+  },
+  "keywords": [
+    "jest",
+    "runner",
+    "concurrent"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/browsertron/jest-runner-concurrent/issues"
+  },
+  "homepage": "https://github.com/browsertron/jest-runner-concurrent#readme",
+  "dependencies": {
+    "exit": "^0.1.2",
+    "jest-runner": "^22.4.3",
+    "throat": "^4.1.0",
+    "worker-farm": "^1.6.0"
+  }
+}
