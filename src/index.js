@@ -3,6 +3,7 @@ const throat = require('throat');
 const exit = require('exit');
 const workerFarm = require('worker-farm');
 const path = require('path');
+const cosmiconfig = require('cosmiconfig');
 
 // worker-farm assumes each exported function accepts a
 // callback as the last arg. Jest's test_worker returns
@@ -21,6 +22,13 @@ class JestRunnerConcurrent extends JestRunner {
   constructor(globalConfig) {
     super(globalConfig);
     this._globalConfig = globalConfig;
+    const result = cosmiconfig('jest-runner-concurrent', {
+      sync: true,
+      rc: false
+    }).load();
+    this._runnerConfig = Object.assign({
+      maxConcurrentTests: Math.ceil(Number.MAX_SAFE_INTEGER/2)
+    }, result.config);
   }
 
   // Overrides _createParallelTestRun from JestRunner
@@ -36,12 +44,12 @@ class JestRunnerConcurrent extends JestRunner {
     onFailure
   ) {
     const globalConfig = this._globalConfig;
-    const maxConcurrentTests = Math.ceil(Number.MAX_SAFE_INTEGER/2);
+    const runnerConfig = this._runnerConfig;
 
     const farm = workerFarm(
       {
         autoStart: true,
-        maxConcurrentCallsPerWorker: maxConcurrentTests,
+        maxConcurrentCallsPerWorker: runnerConfig.maxConcurrentTests,
         maxConcurrentWorkers: globalConfig.maxWorkers,
         maxRetries: 3
       },
@@ -49,7 +57,7 @@ class JestRunnerConcurrent extends JestRunner {
       ['worker']
     );
 
-    const mutex = throat(maxConcurrentTests);
+    const mutex = throat(runnerConfig.maxConcurrentTests);
 
     // Send test suites to workers continuously instead of all at once to track
     // the start time of individual tests.

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/browsertron/jest-runner-concurrent#readme",
   "dependencies": {
+    "cosmiconfig": "^4.0.0",
     "exit": "^0.1.2",
     "jest-runner": "^22.4.3",
     "throat": "^4.1.0",

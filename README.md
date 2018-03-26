@@ -26,10 +26,7 @@ npm install --save-dev jest-runner-concurrent
 
 ## Enable
 
-There are a couple ways to enable the runner:
-
-* [`package.json`](#packagejson)
-* [`jest.config.js`](#jestconfigjs)
+There are a couple ways to enable the runner
 
 ### package.json
 
@@ -49,6 +46,32 @@ There are a couple ways to enable the runner:
 module.exports = {
   runner: 'jest-runner-concurrent'
 }
+```
+
+## Configure
+
+There are also a few ways to configure the runner
+
+Defaults:
+
+* **maxConcurrentTests** - No max. `0` is the same as no max
+
+### package.json
+
+```json
+{
+  "jest-runner-concurrent": {
+    "maxConcurrentTests": 100
+  }
+}
+```
+
+### jest-runner-concurrent.config.js
+
+```js
+module.exports = {
+  maxConcurrentTests: 100
+};
 ```
 
 ## License
