@@ -1,6 +1,6 @@
 {
   "name": "jest-runner-concurrent",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A concurrent runner for Jest",
   "main": "src/index.js",
   "scripts": {
