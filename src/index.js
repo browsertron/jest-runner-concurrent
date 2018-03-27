@@ -28,7 +28,7 @@ class JestRunnerConcurrent extends JestRunner {
     }).load();
     this._runnerConfig = Object.assign({
       maxConcurrentTests: Math.ceil(Number.MAX_SAFE_INTEGER/2)
-    }, result.config);
+    }, result && result.config);
   }
 
   // Overrides _createParallelTestRun from JestRunner
